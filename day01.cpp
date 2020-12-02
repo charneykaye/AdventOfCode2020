@@ -9,20 +9,20 @@ Version 1 using <amounts>
 */
 void v1(vector<int> *amounts)
 {
-    cout << "\nVersion 1\n";
+    cout << endl << "Version 1" << endl;
 
     // product of the 2 items having sum of 2020
     for (auto i : *amounts)
         for (auto j : *amounts)
             if(i+j==2020)
-                cout << i << " + " << j << " = 2020 and " << i << " * " << j << " = " << i * j << "\n";
+                cout << i << " + " << j << " = 2020 and " << i << " * " << j << " = " << i * j << endl;
 
     // product of the 3 items having sum of 2020
     for (auto i : *amounts)
         for (auto j : *amounts)
             for (auto k : *amounts)
                 if(i+j+k==2020)
-                    cout << i << " + " << j << " + " << k << " = 2020 and " << i << " * " << j << " * " << k << " = " << i * j * k << "\n";
+                    cout << i << " + " << j << " + " << k << " = 2020 and " << i << " * " << j << " * " << k << " = " << i * j * k << endl;
 }
 
 /*
@@ -82,9 +82,9 @@ Version 2 subroutine solves <amounts> for <num> members with sum <total>
 */
 void v2(vector<int> *amounts, int num, int total)
 {
-    cout << "\nVersion 2: Solve for " << num << " items having sum of " << total << "\n";
+    cout << endl << "Version 2: Solve for " << num << " items having sum of " << total << endl;
     vector<int> items = findItemsWithSum(amounts, num, total);
-    cout << join(&items, " + ") << " = " << total << " and " << join(&items, " * ") << " = " << product(&items) << "\n";
+    cout << join(&items, " + ") << " = " << total << " and " << join(&items, " * ") << " = " << product(&items) << endl;
 }
 
 /*
@@ -96,7 +96,7 @@ int main()
 
     ifstream inputFile("./day01-input.txt");
     if (!inputFile.good()) {
-        cout << "Failed to load file!\n";
+        cout << "Failed to load file!" << endl;
         return 1;
     }
 
@@ -108,7 +108,7 @@ int main()
     v1(&amounts);
     v2(&amounts, 2, 2020);
     v2(&amounts, 3, 2020);
-    cout << "\n";
+    cout << endl;
 
     return 0;
 }

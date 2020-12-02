@@ -7,6 +7,7 @@
 
 using namespace std;
 
+const int SEARCH_FOR_N = 3;
 const int SEARCH_FOR_SUM = 2020;
 
 /*
@@ -45,17 +46,18 @@ int main()
     while ( inputFile >> value )
         amounts.push_back(value);
     
-
     inputFile.close();
 
     sort(amounts.begin(), amounts.end());
 
-    vector<int> items = findItemsWithSum(&amounts, 3, SEARCH_FOR_SUM);
+    vector<int> items = findItemsWithSum(&amounts, SEARCH_FOR_N, SEARCH_FOR_SUM);
     int product = 1;
     for (auto item : items) 
-        product = product * item;    
+        product = product * item;
 
-    cout << SEARCH_FOR_SUM << " is the sum of " << items << " and their product is " << product << "\n";
+    std::string item_str(items.begin(), items.end());
+
+    cout << SEARCH_FOR_SUM << " is the sum of " << item_str << " and their product is " << product << "\n";
 
     return 0;
 }

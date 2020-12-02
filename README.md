@@ -1,6 +1,8 @@
 # Advent of Code 2020
 
-This is a solution to the first puzzle, in one shell command:
+This is a flat C++ sandbox, just build each .cpp file in place and ignore the binary.
+
+Also here is a solution to the first puzzle, in one shell command:
 
 ```shell
 time for i in $(cat _inputs); do \
@@ -10,6 +12,3 @@ time for i in $(cat _inputs); do \
       fi; done; done
 ```
 
-I have an ulterior motive to develop C++ skills, so I also built basically solution in C++.
-
-See the [src/](/src) folder. For this project, just builds each .cpp file in place and ignore the binary.

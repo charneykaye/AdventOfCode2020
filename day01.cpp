@@ -94,7 +94,7 @@ int main()
 {
     vector<int> amounts;
 
-    ifstream inputFile("./day01_inputs");
+    ifstream inputFile("./day01-input.txt");
     if (!inputFile.good()) {
         cout << "Failed to load file!\n";
         return 1;

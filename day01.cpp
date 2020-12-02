@@ -26,7 +26,7 @@ void v1(vector<int> *amounts)
 }
 
 /*
-Find <n> items from set <amounts> having a sum of <t>
+Find <num> items having a sum of <total> from set <amounts>
 Returns the first answer found, or an empty set
 */
 vector<int> findItemsWithSum (vector<int> *amounts, int num, int total)
@@ -94,7 +94,7 @@ int main()
 {
     vector<int> amounts;
 
-    ifstream inputFile("_inputs");
+    ifstream inputFile("./day01_inputs");
     if (!inputFile.good()) {
         cout << "Failed to load file!\n";
         return 1;

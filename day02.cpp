@@ -32,7 +32,7 @@ char getLetter(string theorem)
 /*
 Get minimum occurrences of required letter from <theorem>
 */
-int getMin(string theorem)
+int getNumOne(string theorem)
 {
     smatch match;
     regex_search(theorem, match, rgxMin);
@@ -42,7 +42,7 @@ int getMin(string theorem)
 /*
 Get maximum occurrences of required letter from <theorem>
 */
-int getMax(string theorem)
+int getNumTwo(string theorem)
 {
     smatch match;
     regex_search(theorem, match, rgxMax);
@@ -62,29 +62,52 @@ int getOccurences(string password, char letter)
 }
 
 /*
-Is <theorem> valid?
+Part 1 using <theorems>
 */
-bool isValid(string theorem)
+void part1(vector<string> *theorems)
 {
-    string password = getPassword(theorem);
-    char letter = getLetter(theorem);
-    int min = getMin(theorem);
-    int max = getMax(theorem);
-    int occurences = getOccurences(password, letter);
-    return min <= occurences && occurences <= max;
+    cout << endl << "Part 1" << endl;
+    int totalValid = 0;
+    for (auto theorem : *theorems) {
+        string password = getPassword(theorem);
+        char letter = getLetter(theorem);
+        int min = getNumOne(theorem);
+        int max = getNumTwo(theorem);
+        int occurences = getOccurences(password, letter);
+        if (min <= occurences && occurences <= max)
+            totalValid++;
+
+    }
+    cout << "Found " << totalValid << " theorems to be valid." << endl;
 }
 
 /*
-Version 1 using <theorems>
+Part 2 using <theorems>
 */
-void v1(vector<string> *theorems)
+void part2(vector<string> *theorems)
 {
-    cout << endl << "Version 1" << endl;
+    cout << endl << "Part 2" << endl;
     int totalValid = 0;
-    for (auto theorem : *theorems)
-        if (isValid(theorem))
-            totalValid++;
-    cout << "Found " << totalValid << " theorems to be valid.";
+    int totalInvalid = 0;
+    for (auto theorem : *theorems) {
+        string password = getPassword(theorem);
+        char letter = getLetter(theorem);
+        int required = getNumOne(theorem);
+        int verboten = getNumTwo(theorem);
+        if (password[required-1] == letter) {
+            if (password[verboten-1] != letter) {
+                cout << "Valid! " << letter << " at " << required << " but not at " << verboten << " in " << password << endl;
+                totalValid++;
+            } else {
+                cout << "INVALID with " << letter << " at " << required << " and " << verboten << " in " << password << endl;
+                totalInvalid++;
+            }
+        } else {
+            cout << "INVALID without " << letter << " at " << required << " in " << password << endl;
+            totalInvalid++;
+        }
+    }
+    cout << "Found " << totalValid << " theorems to be valid and " << totalInvalid << " invalid." << endl;
 }
 
 /*
@@ -105,7 +128,8 @@ int main()
         theorems.push_back(theorem);
     inputFile.close();
 
-    v1(&theorems);
+    part1(&theorems);
+    part2(&theorems);
     cout << endl;
 
     return 0;

@@ -12,14 +12,4 @@ time for i in $(cat _inputs); do \
 
 I have an ulterior motive to develop C++ skills, so I also built basically solution in C++.
 
-See the [src/](/src) folder. This project builds with [CMake](https://cmake.org).
-
-However, the next puzzle indicates that we are going to be escalating the complexity here.
-The first step escalation involves a loop within a loop to find 3 (up from 2) matching items,
-therefore I will implement a recursive search function
-
-> Find <n> items from set <amounts> having a sum of <t>
-> Returns the first answer found, or an empty set
-
-that calls itself until there are only 2.
-
+See the [src/](/src) folder. For this project, just builds each .cpp file in place and ignore the binary.

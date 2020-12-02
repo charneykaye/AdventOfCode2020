@@ -11,7 +11,11 @@ int main()
 {
     vector<int> amounts;
 
-    ifstream inputFile("_inputs");
+    ifstream inputFile("_inputsy");
+    if (!inputFile.good()) {
+        cout << "Failed to load file!\n";
+        return 1;
+    }
 
     int value;
     while ( inputFile >> value )

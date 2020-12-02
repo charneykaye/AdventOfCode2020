@@ -27,13 +27,47 @@ SumFinder::SumFinder (vector<int> a, int b) {
 }
 */
 
+string display(vector<int> items)
+{
+}
+
 /*
 Find <n> items from set <amounts> having a sum of <t>
 Returns the first answer found, or an empty set
 */
-vector<int> findItemsWithSum (vector<int> *amounts, int n, int t)
+vector<int> findItemsWithSum (vector<int> *amounts, int num, int total)
 {
+  for (auto a : *amounts) {
+    if (num > 2) {
+      int remainder = total - a;
+      vector<int> items = findItemsWithSum(amounts, num - 1, remainder);
+      if (!items.empty()) {
+        items.push_back(remainder);
+        return items;
+      }
 
+    } else 
+      for (auto b : *amounts)
+        if (a + b == total) 
+          return {a, b};
+  }
+}
+
+string display(vector<int> *items)
+{
+  std::string str;
+  str.append("[");
+  bool first = true;
+  for (auto item : *items)  
+  if (first) {
+    first = false;
+    str.append(to_string(item));
+  } else {
+    str.append(",");
+    str.append(to_string(item));
+  }
+  str.append("]");
+  return str;
 }
 
 int main()
@@ -41,6 +75,10 @@ int main()
     vector<int> amounts;
 
     ifstream inputFile("_inputs");
+    if (!inputFile.good()) {
+        cout << "Failed to load file!\n";
+        return 1;
+    }
 
     int value;
     while ( inputFile >> value )
@@ -55,9 +93,7 @@ int main()
     for (auto item : items) 
         product = product * item;
 
-    std::string item_str(items.begin(), items.end());
-
-    cout << SEARCH_FOR_SUM << " is the sum of " << item_str << " and their product is " << product << "\n";
+    cout << SEARCH_FOR_SUM << " is the sum of " << display(&items) << " and their product is " << product << "\n";
 
     return 0;
 }

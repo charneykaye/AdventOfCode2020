@@ -92,20 +92,11 @@ void part2(vector<string> *theorems)
     for (auto theorem : *theorems) {
         string password = getPassword(theorem);
         char letter = getLetter(theorem);
-        int required = getNumOne(theorem);
-        int verboten = getNumTwo(theorem);
-        if (password[required-1] == letter) {
-            if (password[verboten-1] != letter) {
-                cout << "Valid! " << letter << " at " << required << " but not at " << verboten << " in " << password << endl;
+        int posA = getNumOne(theorem);
+        int posB = getNumTwo(theorem);
+        if ((password[posA-1] == letter && password[posB-1] != letter) ||
+            (password[posA-1] != letter && password[posB-1] == letter)) 
                 totalValid++;
-            } else {
-                cout << "INVALID with " << letter << " at " << required << " and " << verboten << " in " << password << endl;
-                totalInvalid++;
-            }
-        } else {
-            cout << "INVALID without " << letter << " at " << required << " in " << password << endl;
-            totalInvalid++;
-        }
     }
     cout << "Found " << totalValid << " theorems to be valid and " << totalInvalid << " invalid." << endl;
 }

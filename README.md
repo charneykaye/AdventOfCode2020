@@ -1,3 +1,1 @@
-# Advent of Code 2020
-
-In C++
+By [Charney Kaye](http://charneykaye.com)

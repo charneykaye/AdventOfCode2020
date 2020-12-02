@@ -7,20 +7,20 @@ using namespace std;
 /*
 Version 1 using <amounts>
 */
-void v1(vector<int> amounts)
+void v1(vector<int> *amounts)
 {
     cout << "\nVersion 1\n";
 
     // product of the 2 items having sum of 2020
-    for (auto i : amounts)
-        for (auto j : amounts)
+    for (auto i : *amounts)
+        for (auto j : *amounts)
             if(i+j==2020)
                 cout << i << " + " << j << " = 2020 and " << i << " * " << j << " = " << i * j << "\n";
 
     // product of the 3 items having sum of 2020
-    for (auto i : amounts)
-        for (auto j : amounts)
-            for (auto k : amounts)
+    for (auto i : *amounts)
+        for (auto j : *amounts)
+            for (auto k : *amounts)
                 if(i+j+k==2020)
                     cout << i << " + " << j << " + " << k << " = 2020 and " << i << " * " << j << " * " << k << " = " << i * j * k << "\n";
 }
@@ -51,11 +51,11 @@ vector<int> findItemsWithSum (vector<int> *amounts, int num, int total)
 /*
 Join a set of <items> with <separator>
 */
-string join(vector<int> items, string separator)
+string join(vector<int> *items, string separator)
 {
     std::string str;
     bool first = true;
-    for (auto item : items)  
+    for (auto item : *items)  
     if (first) {
         first = false;
         str.append(to_string(item));
@@ -69,10 +69,10 @@ string join(vector<int> items, string separator)
 /*
 Product of a set of <items>
 */
-int product(vector<int> items)
+int product(vector<int> *items)
 {
     int product = 1;
-    for (auto item : items) 
+    for (auto item : *items) 
         product = product * item;
     return product;
 }
@@ -80,11 +80,11 @@ int product(vector<int> items)
 /*
 Version 2 subroutine solves <amounts> for <num> members with sum <total>
 */
-void v2(vector<int> amounts, int num, int total)
+void v2(vector<int> *amounts, int num, int total)
 {
     cout << "\nVersion 2: Solve for " << num << " items having sum of " << total << "\n";
-    vector<int> items = findItemsWithSum(&amounts, num, total);
-    cout << join(items, " + ") << " = " << total << " and " << join(items, " * ") << " = " << product(items) << "\n";
+    vector<int> items = findItemsWithSum(amounts, num, total);
+    cout << join(&items, " + ") << " = " << total << " and " << join(&items, " * ") << " = " << product(&items) << "\n";
 }
 
 /*
@@ -105,9 +105,9 @@ int main()
         amounts.push_back(value);
     inputFile.close();
 
-    v1(amounts);
-    v2(amounts, 2, 2020);
-    v2(amounts, 3, 2020);
+    v1(&amounts);
+    v2(&amounts, 2, 2020);
+    v2(&amounts, 3, 2020);
     cout << "\n";
 
     return 0;

@@ -88,7 +88,6 @@ void part2(vector<string> *theorems)
 {
     cout << endl << "Part 2" << endl;
     int totalValid = 0;
-    int totalInvalid = 0;
     for (auto theorem : *theorems) {
         string password = getPassword(theorem);
         char letter = getLetter(theorem);
@@ -98,7 +97,7 @@ void part2(vector<string> *theorems)
             (password[posA-1] != letter && password[posB-1] == letter)) 
                 totalValid++;
     }
-    cout << "Found " << totalValid << " theorems to be valid and " << totalInvalid << " invalid." << endl;
+    cout << "Found " << totalValid << " theorems to be valid" << endl;
 }
 
 /*
@@ -108,16 +107,10 @@ int main()
 {
     vector<string> theorems;
 
-    ifstream inputFile("./day02-input.txt");
-    if (!inputFile.good()) {
-        cout << "Failed to load file!" << endl;
-        return 1;
-    }
-
-    string theorem;
-    while (getline(inputFile,theorem))
-        theorems.push_back(theorem);
-    inputFile.close();
+    vector<int> amounts;
+    string line;
+    while (std::getline(std::cin, line)) 
+        theorems.push_back(line);
 
     part1(&theorems);
     part2(&theorems);

@@ -42,16 +42,18 @@ Board::Board(vector<string> *lines) {
 /**
 Solve: Seek a vector until we leave the bottom of the board
  */
-void solve(Board *board, int vX, int vY) {
+unsigned int solve(Board *board, int vX, int vY) {
     cout << endl << "Solve vector x+" << vX << ", y+" << vY << endl;
-    int pX = 0, pY = 0, trees = 0;
+    int pX = 0, pY = 0;
+    unsigned int trees = 0;
     while (pY < board->getHeight()) {
         if (board->get(pX, pY) == '#')
             trees++;
         pX += vX;
         pY += vY;
     }
-    cout << "Encountered " << trees << " trees" << endl;
+    cout << "Encountered " << trees << " trees" << endl << endl;
+    return trees;
 }
 
 /**
@@ -76,7 +78,15 @@ int main() {
     Board board(&lines);
 
     // solutions
-    solve(&board, 3, 1);
+    unsigned int a = solve(&board, 1, 1);
+    unsigned int b = solve(&board, 3, 1);
+    unsigned int c = solve(&board, 5, 1);
+    unsigned int d = solve(&board, 7, 1);
+    unsigned int e = solve(&board, 1, 2);
+
+    // product of solutions
+    unsigned long product = a * b * c * d * e;
+    cout << "Product of solutions is " << product << endl;
 
     return 0;
 }

@@ -5,7 +5,7 @@
 		<Option title="AdventOfCode2020"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\day01\;CMake Files\day02\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\day01\;CMake Files\day02\;CMake Files\day03\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/home/charney/om/AdventOfCode2020"/>
@@ -93,12 +93,43 @@
 					<DistClean command="/usr/bin/make -f &quot;/home/charney/om/AdventOfCode2020/day02/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="day03">
+				<Option output="/home/charney/om/AdventOfCode2020/day03/day03" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/charney/om/AdventOfCode2020/day03"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/charney/om/AdventOfCode2020/day03/Makefile&quot;  VERBOSE=1 day03"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/charney/om/AdventOfCode2020/day03/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/charney/om/AdventOfCode2020/day03/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/charney/om/AdventOfCode2020/day03/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="day03/fast">
+				<Option output="/home/charney/om/AdventOfCode2020/day03/day03" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/charney/om/AdventOfCode2020/day03"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/charney/om/AdventOfCode2020/day03/Makefile&quot;  VERBOSE=1 day03/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/charney/om/AdventOfCode2020/day03/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/charney/om/AdventOfCode2020/day03/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/charney/om/AdventOfCode2020/day03/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 		</Build>
 		<Unit filename="/home/charney/om/AdventOfCode2020/day01/main.cpp">
 			<Option target="day01"/>
 		</Unit>
 		<Unit filename="/home/charney/om/AdventOfCode2020/day02/main.cpp">
 			<Option target="day02"/>
+		</Unit>
+		<Unit filename="/home/charney/om/AdventOfCode2020/day03/main.cpp">
+			<Option target="day03"/>
 		</Unit>
 		<Unit filename="/home/charney/om/AdventOfCode2020/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
@@ -114,6 +145,12 @@
 		</Unit>
 		<Unit filename="/home/charney/om/AdventOfCode2020/day02/input.txt">
 			<Option virtualFolder="CMake Files\day02\"/>
+		</Unit>
+		<Unit filename="/home/charney/om/AdventOfCode2020/day03/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\day03\"/>
+		</Unit>
+		<Unit filename="/home/charney/om/AdventOfCode2020/day03/input.txt">
+			<Option virtualFolder="CMake Files\day03\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

@@ -92,9 +92,18 @@ Bootstrap reads inputs from file
 int main()
 {
     vector<int> amounts;
-    string line;
-    while (std::getline(std::cin, line)) 
-        amounts.push_back(std::stoi(line));
+
+    ifstream inputFile("input.txt");
+    if (!inputFile.good()) {
+        cout << "Failed to load file!\n";
+        cout << "Failed to load file!" << endl;
+        return 1;
+    }
+
+    int value;
+    while ( inputFile >> value )
+        amounts.push_back(value);
+    inputFile.close();
 
     v1(&amounts);
     v2(&amounts, 2, 2020);

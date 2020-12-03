@@ -5,6 +5,7 @@
 **/CMakeFiles
 **/cmake-build-debug
 **/Testing
+**/compile_commands.json
 
 # IDEs
 /.idea

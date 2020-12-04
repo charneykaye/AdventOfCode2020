@@ -3,93 +3,61 @@
 
 using namespace std;
 
-regex rgxPassword("\\s([a-z]+)$");
-regex rgxLetter("([a-z]):");
-regex rgxMin("(\\d+)\\-");
-regex rgxMax("\\-(\\d+)");
 
-/*
-Get password from <theorem>
-*/
-string getPassword(string theorem) {
-    smatch match;
-    regex_search(theorem, match, rgxPassword);
-    return match[1].str();
-}
+/**
+Processor parses one theorem and provides computed results
+ */
+class Processor {
+    regex rgxKVPair;
+public:
+    Processor();
 
-/*
-Get required letter from <theorem>
-*/
-char getLetter(string theorem) {
-    smatch match;
-    regex_search(theorem, match, rgxLetter);
-    return match[1].str()[0];
-}
-
-/*
-Get minimum occurrences of required letter from <theorem>
-*/
-int getNumOne(string theorem) {
-    smatch match;
-    regex_search(theorem, match, rgxMin);
-    return stoi(match[1].str());
-}
-
-/*
-Get maximum occurrences of required letter from <theorem>
-*/
-int getNumTwo(string theorem) {
-    smatch match;
-    regex_search(theorem, match, rgxMax);
-    return stoi(match[1].str());
-}
-
-/*
-Get number of occurrences of a given <letter> in <password>
-*/
-int getOccurrences(string password, char letter) {
-    int r = 0;
-    for (int i = 0; i < password.size(); i++)
-        if (password[i] == letter)
-            r++;
-    return r;
-}
-
-/*
-Part 1 using <theorems>
-*/
-void part1(vector<string> *theorems) {
-    cout << endl << "Part 1" << endl;
-    int totalValid = 0;
-    for (auto theorem : *theorems) {
-        string password = getPassword(theorem);
-        char letter = getLetter(theorem);
-        int min = getNumOne(theorem);
-        int max = getNumTwo(theorem);
-        int occurrences = getOccurrences(password, letter);
-        if (min <= occurrences && occurrences <= max)
-            totalValid++;
-
+    map<string, string> parseKeyValues(const string &theorem) {
+        map<string, string> keyValues;
+        auto t_begin = std::sregex_iterator(theorem.begin(), theorem.end(), rgxKVPair);
+        auto t_end = std::sregex_iterator();
+        for (std::sregex_iterator i = t_begin; i != t_end; ++i) {
+            smatch match = *i;
+            keyValues[match[1].str()] = match[2].str();
+        }
+        return keyValues;
     }
-    cout << "Found " << totalValid << " theorems to be valid." << endl;
+
+};
+
+bool isValid(const map<string, string> &map) {
+    if (0 == map.count("byr")) return false; // (Birth Year)
+    if (0 == map.count("iyr")) return false; // (Issue Year)
+    if (0 == map.count("eyr")) return false; // (Expiration Year)
+    if (0 == map.count("hgt")) return false; // (Height)
+    if (0 == map.count("hcl")) return false; // (Hair Color)
+    if (0 == map.count("ecl")) return false; // (Eye Color)
+    if (0 == map.count("pid")) return false; // (Passport ID)
+// ignore  if (!map.contains("cid")) return false; // (Country ID)
+    return true;
 }
 
-/*
-Part 2 using <theorems>
-*/
-void part2(vector<string> *theorems) {
-    cout << endl << "Part 2" << endl;
-    int totalValid = 0;
-    for (auto theorem : *theorems) {
-        string password = getPassword(theorem);
-        char letter = getLetter(theorem);
-        int posA = getNumOne(theorem);
-        int posB = getNumTwo(theorem);
-        if ((password[posA - 1] == letter && password[posB - 1] != letter) ||
-            (password[posA - 1] != letter && password[posB - 1] == letter))
-            totalValid++;
+/**
+Construct regexes
+@param lines
+ */
+Processor::Processor() {
+    rgxKVPair = regex(R"(\b([a-z]+):([^\s]+))");
+}
+
+/**
+Solve: Seek a vector until we leave the bottom of the processor
+ */
+unsigned int solve(Processor *processor, vector<string> *theorems) {
+    int valid = 0;
+    map<string, string> keyValues;
+    for (const auto &theorem : *theorems) {
+        keyValues = processor->parseKeyValues(theorem);
+        if (isValid(keyValues))
+            valid++;
     }
-    cout << "Found " << totalValid << " theorems to be valid" << endl;
+    cout << "Processor found " << valid << " theorems to be valid." << endl << endl;
+    return valid;
 }
 
 /**
@@ -97,8 +65,8 @@ void part2(vector<string> *theorems) {
  @param line to test for emptiness
  @return  true if line is empty
  */
-bool isEmpty(string line) {
-    return !line.size();
+bool isEmpty(const string &line) {
+    return line.empty();
 }
 
 /*
@@ -113,18 +81,19 @@ int main() {
         return 1;
     }
 
-    string item = "";
+    string theorem;
     string line;
     while (getline(inputFile, line)) {
         if (isEmpty(line)) {
-
-        } else item += line;
-//        theorems.push_back(theorem)
+            theorems.push_back(theorem);
+            theorem = "";
+        } else theorem += " " + line;
     }
     inputFile.close();
 
-    part1(&theorems);
-    part2(&theorems);
+    Processor processor;
+
+    solve(&processor, &theorems);
     cout << endl;
 
     return 0;
